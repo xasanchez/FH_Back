@@ -65,4 +65,16 @@ router.put('/', (req, res) => {
 
 });
 
+// Ruta que crea el PDF
+router.get('/CreaPdf:id', (req, res) => {
+  const { id } = req.params; 
+  mysqlConnection.query('SELECT * FROM usuarios WHERE id_usuario = ?', [id], (err, rows, fields) => {
+    if (!err) {
+      res.json(rows[0]);
+    } else {
+      console.log(err);
+    }
+  });
+});
+
 module.exports = router;
